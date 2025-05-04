@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -39,6 +40,11 @@ export default function Login() {
         />
       </div>
       <button type="submit">Login</button>
+
+      <br />
+      <Link to="/signup">Don't have an account?, Create an Account now!</Link>
+      <br />
+      <Link to="/">← Back to Home</Link>
     </form>
   );
 }

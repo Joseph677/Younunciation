@@ -1,9 +1,9 @@
 1- Make signup, login, logout methods that connect to supabase database (AuthContext.jsx) ✔
-2- Make a SignUp page in components folder ❌
+2- Make a SignUp page in components folder ✔
 3- Enhance the current css of the page and components ❌
 
 Dashboard page requirements:
-1- Search bar for keywords ❌
-2- iframe for youtube videos ❌
-3- selection between uk/us accents ❌
-4- subtitles ❌
+1- Search bar for keywords ✔
+2- iframe for youtube videos ✔
+3- selection between uk/us accents ✔
+4- subtitles ✔

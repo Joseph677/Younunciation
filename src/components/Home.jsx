@@ -8,9 +8,9 @@ function Home() {
         <h1>Home</h1>
         <p>Welcome to Younunciation – your pronunciation practice app!</p>
 
-        <div className="auth-links">
-          <Link to="/login">Go to Login</Link>
-          <Link to="/signup">Create an Account</Link>
+        <div className="auth-buttons">
+          <Link to="/login" className="btn">Go to Login</Link>
+          <Link to="/signup" className="btn">Create an Account</Link>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
-
+import "../styles/Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,30 +21,37 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <div style={{color: 'red'}}>{error}</div>}
-      <div>
-        <label>Email</label>
-        <input 
-          type="email" 
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} 
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input 
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button type="submit">Login</button>
+    <div className="login-wrapper">
+      <div className="login-card">
+        <h2>Login</h2>
+        {error && <div className="error-message">{error}</div>}
 
-      <br />
-      <Link to="/signup">Don't have an account?, Create an Account now!</Link>
-      <br />
-      <Link to="/">← Back to Home</Link>
-    </form>
+        <form onSubmit={handleSubmit}>
+          <label>Email</label>
+          <input 
+            type="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+            required
+          />
+
+          <label>Password</label>
+          <input 
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+
+        <p className="signup-link">
+          Don’t have an account? <Link to="/signup">Create an Account</Link>
+        </p>
+
+        <Link className="back-home" to="/">← Back to Home</Link>
+      </div>
+    </div>
   );
 }

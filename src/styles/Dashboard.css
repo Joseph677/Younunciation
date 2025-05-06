@@ -1,0 +1,71 @@
+.dashboard-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .dashboard-card {
+    background-color: #2c2c3a;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+  }
+  
+  .dashboard-card h1,
+  .dashboard-card h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .dashboard-card form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .dashboard-card input,
+  .dashboard-card select {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+    min-width: 180px;
+  }
+  
+  .dashboard-card input:focus,
+  .dashboard-card select:focus {
+    outline: 2px solid #9b59b6;
+  }
+  
+  .dashboard-card button {
+    padding: 0.6rem 1.2rem;
+    background-color: #9b59b6;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard-card button:hover {
+    background-color: #8e44ad;
+  }
+  
+  .widget-box {
+    margin-top: 1.5rem;
+  }
+  
+  .logout-btn {
+    margin-top: 2rem;
+  }
+  

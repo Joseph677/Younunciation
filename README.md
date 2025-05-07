@@ -64,7 +64,7 @@ Set up environment variables:
 Create a `.env` file in the root directory and add your Supabase API key:
 
 ```
-VITE_SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhwb3hyeWJmdWJkYmh4a3VyaGpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYwOTQ5NTAsImV4cCI6MjA2MTY3MDk1MH0.ZqpA5ayZaEw876n1X3WnO1Zovr5Ww653YSqou28Ikwg'
+VITE_SUPABASE_KEY='YOUR_API_KEY'
 ```
 
 Run the development server:

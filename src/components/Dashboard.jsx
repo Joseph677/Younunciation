@@ -61,7 +61,7 @@ export default function Dashboard() {
     <div className="dashboard-wrapper">
       <div className="dashboard-card">
         <h1>Dashboard</h1>
-        <p>Welcome <strong>{user.email}</strong></p>
+        <p>Welcome <strong>{user.email.split('@')[0]}</strong></p>
         <h2>Welcome to Younunciation</h2>
 
         <form onSubmit={handleSearch}>

@@ -2,6 +2,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import '../styles/Dashboard.css'; // ✅ make sure you import the new CSS
+import fetchVideo from '../fetchVideo';
+import VideoFrame from './VideoFrame';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -9,6 +11,7 @@ export default function Dashboard() {
   const [keyword, setKeyword] = useState('');
   const [accent, setAccent] = useState('english');
   const [ygWidget, setYgWidget] = useState(null);
+  const [keywordDetected, setKeywordDetected] = useState(null)
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -34,6 +37,14 @@ export default function Dashboard() {
     e.preventDefault();
     if (ygWidget && keyword.trim()) {
       ygWidget.fetch(keyword, accent);
+    }
+  };
+
+  const handleSearchOriginal = async(e) => {
+    e.preventDefault();
+    let url = await fetchVideo(keyword)
+    if(url) {
+      setKeywordDetected(url)
     }
   };
 
@@ -67,6 +78,12 @@ export default function Dashboard() {
           </select>
           <button type="submit">Search</button>
         </form>
+
+        <button onClick={handleSearchOriginal}>Search using original method</button>
+
+        {(keywordDetected &&
+          <VideoFrame url={keywordDetected}/>
+        )}
 
         <div id="widget-container" className="widget-box"></div>
 

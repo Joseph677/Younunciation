@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+    "dotenv": "^16.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.5.3",
-    "younunciation": "file:"
+    "younunciation": "file:",
+    "youtube-captions-scraper": "^2.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

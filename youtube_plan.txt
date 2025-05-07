@@ -1,0 +1,97 @@
+Look for videos that have working embed. This is the structure of the url:
+https://www.youtube.com/embed/E3Yo7PULlPs?si=cfSe7OIfGDWrxDyX&amp
+
+adding ";start=1" after the url starts the video from this second, '1' representing seconds. For example '120' means 2 minutes.
+
+structure of captions:
+
+[
+    {
+    start: '14.28',
+    dur: '5.36',
+    text: 'energy so soll man sich fühlen wenn man'
+    },
+    {
+    start: '16.72',
+    dur: '6.04',
+    text: 'diese Getränke zu sich genommen'
+    },
+    {
+    start: '19.64',
+    dur: '4.84',
+    text: 'hat ist ein riesen Trend oder man will'
+    },
+    ...
+]
+
+if we want to search for the word 'energy' it would be like:
+
+let keyword = 'energy'
+captions.forEach(caption => {
+    if(caption.text.toLowerCase().includes(keyword)) {
+        ...
+    }
+})
+
+example youtube api response:
+
+{
+  "kind": "youtube#videoListResponse",
+  "etag": "2BihhchW1bDFXx-Zbu-YXHV7mG0",
+  "items": [
+    {
+      "kind": "youtube#video",
+      "etag": "WUaUD2LVzdVDMFKe5KfNYz7pPYU",
+      "id": "qwQwSTWHTAY",
+      "snippet": {
+        "publishedAt": "2024-08-23T12:50:00Z",
+        "channelId": "UCklUqFEcJqFnWKEBozw5p4g",
+        "title": "Expat Life - Adjusting to a New City (Dialogue for learning Russian)",
+        "description": "Learn Russian With Max:\n📚 Get 100 transcripts of my YouTube videos ► https://www.russianwithmax.com/product/100-video-transcript-package/\n💬 Learn Russian through real conversations ► https://www.russianwithmax.com/product/real-russian-conversation/\n📖 Learn Russian through stories ► https://www.russianwithmax.com/product/russian-through-stories-lesson-pack/\n\n🎙️ Comprehensible Russian Podcast ► https://www.russianwithmax.com/podcast/\n(Available on all podcast platforms: iTunes, Apple Podcasts, Spotify, etc)\n\n😍Membership program ► https://www.russianwithmax.com/mem\nТранскрипции для видео, подкастов, аудиоуроки и многое другое.\n\n💰Поддержать проект\n►► https://www.russianwithmax.com/support/\n\n📧Где меня найти?\nTelegram channel: https://t.me/RussianWithMax\nInstagram: https://www.instagram.com/russianwithmax\nWebsite: https://www.russianwithmax.com/\n\nRussian time stamps: \n00:00 - Интро\n00:48 - Что мы успели сделать в Неукене?\n04:49 - Что нам удалось реализовать из того что мы хотели?\n06:34 - О физической активности и психологическом состоянии\n11:30 - О практике испанского\n\nEnglish time stamps:\n00:00 - Intro\n00:48 - What we managed to do in Neuquén?\n04:49 - What did we manage to realize from what we wanted?\n06:34 - About physical activity and psychological well-being\n11:30 - On practicing Spanish\n\n#RussianDialogue #RussianWithMax #IntermediateRussian",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/qwQwSTWHTAY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/qwQwSTWHTAY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/qwQwSTWHTAY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/qwQwSTWHTAY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/qwQwSTWHTAY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Russian With Max",
+        "tags": [
+          "Russian with subs",
+          ...
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Expat Life - Adjusting to a New City (Dialogue for learning Russian)",
+          "description": "Learn Russian With Max:\n📚 Get 100 transcripts of my YouTube videos ► https://www.russianwithmax.com/product/100-video-transcript-package/\n💬 Learn Russian through real conversations ► https://www.russianwithmax.com/product/real-russian-conversation/\n📖 Learn Russian through stories ► https://www.russianwithmax.com/product/russian-through-stories-lesson-pack/\n\n🎙️ Comprehensible Russian Podcast ► https://www.russianwithmax.com/podcast/\n(Available on all podcast platforms: iTunes, Apple Podcasts, Spotify, etc)\n\n😍Membership program ► https://www.russianwithmax.com/mem\nТранскрипции для видео, подкастов, аудиоуроки и многое другое.\n\n💰Поддержать проект\n►► https://www.russianwithmax.com/support/\n\n📧Где меня найти?\nTelegram channel: https://t.me/RussianWithMax\nInstagram: https://www.instagram.com/russianwithmax\nWebsite: https://www.russianwithmax.com/\n\nRussian time stamps: \n00:00 - Интро\n00:48 - Что мы успели сделать в Неукене?\n04:49 - Что нам удалось реализовать из того что мы хотели?\n06:34 - О физической активности и психологическом состоянии\n11:30 - О практике испанского\n\nEnglish time stamps:\n00:00 - Intro\n00:48 - What we managed to do in Neuquén?\n04:49 - What did we manage to realize from what we wanted?\n06:34 - About physical activity and psychological well-being\n11:30 - On practicing Spanish\n\n#RussianDialogue #RussianWithMax #IntermediateRussian"
+        },
+        "defaultAudioLanguage": "ru"
+      }
+    }
+  ],
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  }
+}

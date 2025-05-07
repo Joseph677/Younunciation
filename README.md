@@ -15,6 +15,22 @@ Younunciation is a sleek, dark-themed web application designed to help users pra
 
 ## Screenshots
 
+### Home 
+![image](https://github.com/user-attachments/assets/441fa488-bc48-489b-ad60-a870129ff2df)
+
+### Sign up
+![image](https://github.com/user-attachments/assets/2045aa43-4639-42da-bd78-888c6285fd6f)
+
+### Login
+![image](https://github.com/user-attachments/assets/5ec92d5b-9a46-4ce8-bb5a-1874e8bd477f)
+
+### Dashboard
+![image](https://github.com/user-attachments/assets/3d8d585d-7868-45b0-8035-9f20dfcee032)
+
+### Searching for a word
+![image](https://github.com/user-attachments/assets/c5eebc09-619d-4766-9cd7-f44c0ce7e428)
+
+
 ---
 
 ## Tech Stack

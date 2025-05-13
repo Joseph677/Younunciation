@@ -1,19 +1,32 @@
-# 🎙️ Younunciation
-Younunciation is a sleek, dark-themed web application designed to help users practice and improve their English pronunciation. Leveraging the YouGlish platform, which utilizes the YouTube API, it offers a seamless experience for searching and listening to word pronunciations in various English accents.
+## Brief introduction
+This project is an attempt to figure out the way Youglish website was made, specifically the inner workings and backend of the website. It is also was an experience in implementing user authentication using Supabase and learning react components, states and props. Supabase also provided the database; a key factor in the approach implementation.
 
----
-## 🚀 Features
-- User Authentication: Secure sign-up and login functionality powered by Supabase.
+## instructions
 
-- Pronunciation Search: Search for English words and hear their pronunciations in US, UK, or all English accents.
+Install dependencies:
 
-- Responsive Design: Dark grey and purple theme with a modern, responsive layout.
+```
+npm install
+```
 
-- Interactive Dashboard: User-friendly dashboard to manage searches and access pronunciation tools.
+Set up environment variables:
 
----
+Create a `.env` file in the root directory and add your Supabase API key (auth & app call only, to try the approach go to the deployment section below):
 
-## Screenshots
+```
+VITE_SUPABASE_KEY='YOUR_API_KEY'
+```
+
+Run the development server:
+
+```
+npm run dev
+```
+
+## Deployment
+Or you can visit the site at: https://theyoununciation.netlify.app/
+
+## Screenshots of the project
 
 ### Home 
 ![image](https://github.com/user-attachments/assets/441fa488-bc48-489b-ad60-a870129ff2df)
@@ -29,48 +42,3 @@ Younunciation is a sleek, dark-themed web application designed to help users pra
 
 ### Searching for a word
 ![image](https://github.com/user-attachments/assets/c5eebc09-619d-4766-9cd7-f44c0ce7e428)
-
-
----
-
-## Tech Stack
-
-- Frontend: React, Vite
-
-- Backend: Supabase (Authentication & Database)
-
-- Styling: CSS Modules with a dark grey and purple theme
-
-- API Integration: YouGlish (utilizing YouTube API)
-
----
-## 📦 Installation
-
-Clone the repository:
-
-```
-git clone https://github.com/Joseph677/Younunciation.git
-cd Younunciation
-```
-
-Install dependencies:
-
-```
-npm install
-```
-
-Set up environment variables:
-
-Create a `.env` file in the root directory and add your Supabase API key:
-
-```
-VITE_SUPABASE_KEY='YOUR_API_KEY'
-```
-
-Run the development server:
-
-```
-npm run dev
-```
-The application will be available at http://localhost:5173/.
-

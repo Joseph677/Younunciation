@@ -23,30 +23,23 @@ async function fetchSubtitles(vidId) {
 
 let { data: URLs, error } = await supabase
   .from('URLs')
-  .select('link')
+  .select('*')
+  .eq('id', 4)
 if (error) {
   console.log(error)
 }
 
-// URLs.forEach(row => {
-//   let url = row.link
-//   let vidID = url.substring(url.indexOf("embed/")+6, url.indexOf("?si="))
-// })
-
-let url = URLs[1].link
-let vidID = url.substring(url.indexOf("embed/")+6, url.indexOf("?si="))
-
-let caption = await fetchSubtitles(vidID)
-console.log(caption)
-
-const { data, error2 } = await supabase
+URLs.forEach(async row => {
+  let url = row.link
+  let vidID = url.substring(url.indexOf("embed/")+6, url.indexOf("?si="))
+  let caption = await fetchSubtitles(vidID)
+  const { data, error } = await supabase
   .from('URLs')
   .update({captions: caption})
-  .eq('id', 1)
+  .eq('id', row.id)
   .select()
-
-if (error2) {
-  console.log(error)
-}
-
-console.log(data)
+  if(error) {
+    console.log(`Error updating captions value: ${error}`)
+  }
+  console.log(`Updated successfully: ${JSON.stringify(data)}`)
+})

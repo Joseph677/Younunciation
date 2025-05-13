@@ -1,47 +1,56 @@
 import supabase from './supabase.js';
 
-//temp
-// import { createClient } from '@supabase/supabase-js'
-// import dotenv from 'dotenv'
-
-// dotenv.config()
-
-// const supabaseUrl = 'https://hpoxrybfubdbhxkurhjf.supabase.co'
-// const supabaseKey = process.env.VITE_SUPABASE_KEY
-// const supabase = createClient(supabaseUrl, supabaseKey)
-
-const searchKeyword = (captions, keyword) => {
-    let cap
-    captions.forEach(caption => {
-        let sentence = caption.text.split(" ")
-        sentence.forEach(word => {
-            if(word.toLowerCase().includes(keyword.toLowerCase())) {
-                cap = caption
-                return caption
+const searchKeyword = (URLs, keyword) => {
+    let links = URLs.map((row) => row.link)
+    let captions = URLs.map((row) => row.captions)
+    let cap, link
+    captions.forEach((caption, index) => {
+        caption = JSON.parse(caption)
+        for (let sentenceobj of caption) {
+            let sentence = sentenceobj.text.replaceAll(/\.|\,/g, "") // remove full stops and commas from the caption
+            sentence = sentence.split(/\n| /) // separate by spaces and \n
+            for (let word of sentence) {
+                if (word.toLowerCase().trim() === keyword.toLowerCase().trim()) {
+                    cap = sentenceobj
+                    link = links[index]
+                    break
+                }
             }
-        })
+        }
     });
-    return cap
+    return [cap, link]
 }
 
-const fetchUrl = async () => {
-    let { data: URLs, error } = await supabase
+const selectLang = async(lang) => {
+    if(lang !== "all") {
+        return await supabase
         .from('URLs')
         .select('*')
-    if(error) {
-        console.log(error)
+        .eq("lang", lang)
     }
-    return [URLs[1].link, JSON.parse(URLs[1].captions)]
+    else {
+        return await supabase
+        .from('URLs')
+        .select('*')
+    }
+} 
+
+const fetchUrl = async(lang) => {
+    let {data: URLs, error} = await selectLang(lang)
+    if(error) {
+        console.log(`Error: ${error}`)
+    }
+    return URLs
 }
 
-const fetchVideo = async(keyword) => {
+const fetchVideo = async(keyword, lang) => {
     let timedURL
-    let [url, captions] = await fetchUrl()
-    
-    let foundCaption = searchKeyword(captions, keyword)
+    let URLs = await fetchUrl(lang)
+    let [foundCaption, foundLink] = searchKeyword(URLs, keyword)
+
     console.log(foundCaption)
     if(foundCaption) {
-        timedURL = url + ";start=" + parseInt(foundCaption.start)
+        timedURL = foundLink + ";start=" + parseInt(foundCaption.start)
         console.log(timedURL)
         return timedURL
     }

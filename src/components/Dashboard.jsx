@@ -9,7 +9,7 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
-  const [accent, setAccent] = useState('english');
+  const [accent, setAccent] = useState('all');
   const [ygWidget, setYgWidget] = useState(null);
   const [keywordDetected, setKeywordDetected] = useState(null)
 
@@ -42,7 +42,7 @@ export default function Dashboard() {
 
   const handleSearchOriginal = async(e) => {
     e.preventDefault();
-    let url = await fetchVideo(keyword)
+    let url = await fetchVideo(keyword, accent)
     if(url) {
       setKeywordDetected(url)
     }
@@ -74,7 +74,7 @@ export default function Dashboard() {
           <select value={accent} onChange={(e) => setAccent(e.target.value)}>
             <option value="us">US Accent</option>
             <option value="uk">UK Accent</option>
-            <option value="english">All English</option>
+            <option value="all">All English</option>
           </select>
           <button type="submit">Search</button>
         </form>

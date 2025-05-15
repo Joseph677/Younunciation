@@ -4,7 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Home from './components/Home';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import SignUp from './components/Signup';
+import SignUp from './components/SignUp';
 
 function App() {
   return (

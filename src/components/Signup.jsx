@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import supabase from '../supabase';
 import '../styles/Signup.css';
+import FormInput from './FormInput';
+import Button from './Button';
+import CardContainer from './CardContainer';
 
 function SignUp() {
   const [email, setEmail] = useState('');
@@ -12,10 +15,45 @@ function SignUp() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Validate name fields - only allow alphabetical characters and spaces
+  const validateName = (value) => {
+    if (!value) return '';
+    
+    // Check if input contains only letters and spaces
+    if (!/^[A-Za-z\s]+$/.test(value)) {
+      return 'Only alphabetical characters are allowed';
+    }
+    return '';
+  };
+
+  // Password validation
+  const validatePassword = (value) => {
+    if (!value) return '';
+    
+    if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return '';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setMessage('');
+
+    // Final validation check before submission
+    const nameError = validateName(firstName) || validateName(lastName);
+    const passwordError = validatePassword(password);
+    
+    if (nameError) {
+      setError(nameError);
+      return;
+    }
+    
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -36,45 +74,73 @@ function SignUp() {
     }
   };
 
+  const footerContent = (
+    <Link to="/login">
+      <Button variant="text" size="small">Already have an account? Login</Button>
+    </Link>
+  );
+
   return (
     <div className="signup-wrapper">
-      <div className="signup-card">
-        <h2>Sign Up</h2>
+      <CardContainer 
+        title="Sign Up" 
+        footerContent={footerContent}
+        className="signup-card"
+      >
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="First Name"
+          <FormInput
+            label="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
+            placeholder="Enter your first name"
+            validateInput={validateName}
+            errorMessage="Only alphabetical characters are allowed"
           />
-          <input
-            type="text"
-            placeholder="Last Name"
+          
+          <FormInput
+            label="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
+            placeholder="Enter your last name"
+            validateInput={validateName}
+            errorMessage="Only alphabetical characters are allowed"
           />
-          <input
+          
+          <FormInput
+            label="Email"
             type="email"
-            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Enter your email"
           />
-          <input
+          
+          <FormInput
+            label="Password"
             type="password"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Create a password"
+            validateInput={validatePassword}
           />
-          <button type="submit">Sign Up</button>
+          
+          <p className="password-hint">Password must be at least 6 characters</p>
+          
+          <Button 
+            type="submit" 
+            variant="primary" 
+            fullWidth
+          >
+            Sign Up
+          </Button>
         </form>
-      </div>
+      </CardContainer>
     </div>
   );
 }

@@ -1,9 +1,26 @@
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
-import '../styles/Dashboard.css'; // ✅ make sure you import the new CSS
+import '../styles/Dashboard.css';
 import fetchVideo from '../fetchVideo';
 import VideoFrame from './VideoFrame';
+import Button from './Button';
+import FormInput from './FormInput';
+import CardContainer from './CardContainer';
+
+// Accent selector component
+const AccentSelector = ({ value, onChange }) => {
+  return (
+    <div className="accent-selector">
+      <label>Select Accent:</label>
+      <select value={value} onChange={(e) => onChange(e.target.value)}>
+        <option value="us">US Accent</option>
+        <option value="uk">UK Accent</option>
+        <option value="all">All English</option>
+      </select>
+    </div>
+  );
+};
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -11,7 +28,8 @@ export default function Dashboard() {
   const [keyword, setKeyword] = useState('');
   const [accent, setAccent] = useState('all');
   const [ygWidget, setYgWidget] = useState(null);
-  const [keywordDetected, setKeywordDetected] = useState(null)
+  const [keywordDetected, setKeywordDetected] = useState(null);
+  const [searchError, setSearchError] = useState('');
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -33,8 +51,28 @@ export default function Dashboard() {
     };
   }, []);
 
+  // Validate keyword - only allow alphabetical characters
+  const validateKeyword = (value) => {
+    if (!value) return '';
+    
+    // Check if input contains only letters
+    if (!/^[A-Za-z]+$/.test(value)) {
+      return 'Only alphabetical characters are allowed';
+    }
+    return '';
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
+    setSearchError('');
+    
+    // Final validation
+    const error = validateKeyword(keyword);
+    if (error) {
+      setSearchError(error);
+      return;
+    }
+    
     if (ygWidget && keyword.trim()) {
       ygWidget.fetch(keyword, accent);
     }
@@ -42,9 +80,20 @@ export default function Dashboard() {
 
   const handleSearchOriginal = async(e) => {
     e.preventDefault();
-    let url = await fetchVideo(keyword, accent)
+    setSearchError('');
+    
+    // Final validation
+    const error = validateKeyword(keyword);
+    if (error) {
+      setSearchError(error);
+      return;
+    }
+    
+    let url = await fetchVideo(keyword, accent);
     if(url) {
-      setKeywordDetected(url)
+      setKeywordDetected(url);
+    } else {
+      setSearchError('No results found for this word');
     }
   };
 
@@ -57,38 +106,71 @@ export default function Dashboard() {
     }
   }
 
+  const headerRight = (
+    <Button 
+      variant="danger" 
+      size="small" 
+      onClick={handleLogout}
+    >
+      Logout
+    </Button>
+  );
+
   return (
     <div className="dashboard-wrapper">
-      <div className="dashboard-card">
-        <h1>Dashboard</h1>
-        <p>Welcome <strong>{user.email.split('@')[0]}</strong></p>
-        <h2>Welcome to Younunciation</h2>
+      <CardContainer 
+        title="Younunciation" 
+        headerRight={headerRight}
+        className="dashboard-card"
+      >
+        <p className="welcome-message">
+          Welcome <strong>{user?.email?.split('@')[0]}</strong>! Search for a word to hear its pronunciation.
+        </p>
 
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Enter a word..."
+        <form onSubmit={handleSearch} className="search-form">
+          <FormInput
+            label="Word to search"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Enter a word..."
+            validateInput={validateKeyword}
+            errorMessage="Only alphabetical characters are allowed"
           />
-          <select value={accent} onChange={(e) => setAccent(e.target.value)}>
-            <option value="us">US Accent</option>
-            <option value="uk">UK Accent</option>
-            <option value="all">All English</option>
-          </select>
-          <button type="submit">Search</button>
+          
+          <AccentSelector 
+            value={accent} 
+            onChange={setAccent} 
+          />
+          
+          {searchError && <p className="error-message">{searchError}</p>}
+          
+          <div className="search-buttons">
+            <Button 
+              type="submit" 
+              variant="primary"
+            >
+              Search with YouGlish
+            </Button>
+            
+            <Button 
+              type="button" 
+              variant="secondary" 
+              onClick={handleSearchOriginal}
+            >
+              Search using original method
+            </Button>
+          </div>
         </form>
 
-        <button onClick={handleSearchOriginal}>Search using original method</button>
-
-        {(keywordDetected &&
-          <VideoFrame url={keywordDetected}/>
+        {keywordDetected && (
+          <div className="video-result">
+            <h3>Found "{keyword}" in video:</h3>
+            <VideoFrame url={keywordDetected}/>
+          </div>
         )}
 
         <div id="widget-container" className="widget-box"></div>
-
-        <button className="logout-btn" onClick={handleLogout}>Logout</button>
-      </div>
+      </CardContainer>
     </div>
   );
 }

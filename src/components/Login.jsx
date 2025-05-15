@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import "../styles/Login.css";
+import FormInput from './FormInput';
+import Button from './Button';
+import CardContainer from './CardContainer';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,6 +16,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      setError('');
       await login(email, password);
       navigate('/dashboard');
     } catch (error) {
@@ -20,38 +24,53 @@ export default function Login() {
     }
   }
 
+  const footerContent = (
+    <Link className="back-home" to="/">
+      <Button variant="text" size="small">← Back to Home</Button>
+    </Link>
+  );
+
   return (
     <div className="login-wrapper">
-      <div className="login-card">
-        <h2>Login</h2>
+      <CardContainer 
+        title="Login" 
+        footerContent={footerContent}
+        className="login-card"
+      >
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input 
-            type="email" 
+          <FormInput
+            label="Email"
+            type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)} 
+            onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Enter your email"
           />
 
-          <label>Password</label>
-          <input 
+          <FormInput
+            label="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Enter your password"
           />
 
-          <button type="submit">Login</button>
+          <Button 
+            type="submit" 
+            variant="primary" 
+            fullWidth
+          >
+            Login
+          </Button>
         </form>
 
         <p className="signup-link">
-          Don’t have an account? <Link to="/signup">Create an Account</Link>
+          Don't have an account? <Link to="/signup">Create an Account</Link>
         </p>
-
-        <Link className="back-home" to="/">← Back to Home</Link>
-      </div>
+      </CardContainer>
     </div>
   );
 }

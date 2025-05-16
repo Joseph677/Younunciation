@@ -32,18 +32,23 @@ Or you can visit the site at: https://theyoununciation.netlify.app/
 ![image](https://github.com/user-attachments/assets/b431f5d5-9b0a-49d0-bdf6-6c9026ce3805)
 
 ### Sign up
-![image](https://github.com/user-attachments/assets/caf8d275-ff21-49a8-9f87-8ba0686ed52b)
+![image](https://github.com/user-attachments/assets/12cc5583-dde5-4acd-9bdc-811c4db0d143)
+
 
 ### Login
-![image](https://github.com/user-attachments/assets/5c4ea5d3-c69b-42f2-87c0-db6dae5dd267)
+![image](https://github.com/user-attachments/assets/820f73f0-898c-4223-af41-afb3d9365314)
+
 
 ### Dashboard
-![image](https://github.com/user-attachments/assets/082d21e5-9069-4b9b-8b5f-53a987dafdfe)
+![image](https://github.com/user-attachments/assets/4e335ebf-f01b-47ef-af2b-5439aff766ce)
+
 
 
 ### Searching for a word (Youglish api)
-![image](https://github.com/user-attachments/assets/c7198ad8-04f8-430c-857e-860b9da09702)
+![image](https://github.com/user-attachments/assets/bc069a05-a8d2-4977-8fc6-ca0843b6db51)
+
 
 ### Searching for a word (Our approach)
-![image](https://github.com/user-attachments/assets/7c9d5076-55b3-4ee7-9c60-824addf60ddf)
+![image](https://github.com/user-attachments/assets/37e8fa1d-e686-4ba3-be80-7021b975f18a)
+
 

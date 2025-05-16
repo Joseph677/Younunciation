@@ -40,7 +40,7 @@ export default function Login() {
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <FormInput
+          <FormInput className="form-group"
             label="Email"
             type="email"
             value={email}
@@ -49,7 +49,7 @@ export default function Login() {
             placeholder="Enter your email"
           />
 
-          <FormInput
+          <FormInput className="form-group"
             label="Password"
             type="password"
             value={password}

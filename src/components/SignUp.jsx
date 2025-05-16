@@ -91,7 +91,7 @@ function SignUp() {
         {error && <p className="error-message">{error}</p>}
 
         <form onSubmit={handleSubmit}>
-          <FormInput
+          <FormInput className="form-group"
             label="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -101,7 +101,7 @@ function SignUp() {
             errorMessage="Only alphabetical characters are allowed"
           />
           
-          <FormInput
+          <FormInput className="form-group"
             label="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -111,7 +111,7 @@ function SignUp() {
             errorMessage="Only alphabetical characters are allowed"
           />
           
-          <FormInput
+          <FormInput className="form-group"
             label="Email"
             type="email"
             value={email}
@@ -120,7 +120,7 @@ function SignUp() {
             placeholder="Enter your email"
           />
           
-          <FormInput
+          <FormInput className="form-group"
             label="Password"
             type="password"
             value={password}

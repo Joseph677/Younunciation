@@ -54,7 +54,7 @@ export default function Dashboard() {
   // Validate keyword - only allow alphabetical characters
   const validateKeyword = (value) => {
     if (!value) return '';
-    
+
     // Check if input contains only letters
     if (!/^[A-Za-z]+$/.test(value)) {
       return 'Only alphabetical characters are allowed';
@@ -65,32 +65,32 @@ export default function Dashboard() {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchError('');
-    
+
     // Final validation
     const error = validateKeyword(keyword);
     if (error) {
       setSearchError(error);
       return;
     }
-    
+
     if (ygWidget && keyword.trim()) {
       ygWidget.fetch(keyword, accent);
     }
   };
 
-  const handleSearchOriginal = async(e) => {
+  const handleSearchOriginal = async (e) => {
     e.preventDefault();
     setSearchError('');
-    
+
     // Final validation
     const error = validateKeyword(keyword);
     if (error) {
       setSearchError(error);
       return;
     }
-    
+
     let url = await fetchVideo(keyword, accent);
-    if(url) {
+    if (url) {
       setKeywordDetected(url);
     } else {
       setSearchError('No results found for this word');
@@ -107,9 +107,9 @@ export default function Dashboard() {
   }
 
   const headerRight = (
-    <Button 
-      variant="danger" 
-      size="small" 
+    <Button
+      variant="danger"
+      size="small"
       onClick={handleLogout}
     >
       Logout
@@ -118,8 +118,8 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-wrapper">
-      <CardContainer 
-        title="Younunciation" 
+      <CardContainer
+        title="Younunciation"
         headerRight={headerRight}
         className="dashboard-card"
       >
@@ -128,44 +128,42 @@ export default function Dashboard() {
         </p>
 
         <form onSubmit={handleSearch} className="search-form">
-          <FormInput
-            label="Word to search"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder="Enter a word..."
-            validateInput={validateKeyword}
-            errorMessage="Only alphabetical characters are allowed"
-          />
-          
-          <AccentSelector 
-            value={accent} 
-            onChange={setAccent} 
-          />
-          
+          <div className="search-fields">
+            <div className="form-group">
+              <label htmlFor="keyword">Word to search</label>
+              <input
+                type="text"
+                id="keyword"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                placeholder="Enter a word..."
+              />
+            </div>
+
+            <AccentSelector
+              value={accent}
+              onChange={setAccent}
+            />
+          </div>
+
           {searchError && <p className="error-message">{searchError}</p>}
-          
+
           <div className="search-buttons">
-            <Button 
-              type="submit" 
-              variant="primary"
-            >
+            <Button type="submit" variant="primary">
               Search with YouGlish
             </Button>
-            
-            <Button 
-              type="button" 
-              variant="secondary" 
-              onClick={handleSearchOriginal}
-            >
+
+            <Button type="button" variant="secondary" onClick={handleSearchOriginal}>
               Search using original method
             </Button>
           </div>
         </form>
 
+
         {keywordDetected && (
           <div className="video-result">
             <h3>Found "{keyword}" in video:</h3>
-            <VideoFrame url={keywordDetected}/>
+            <VideoFrame url={keywordDetected} />
           </div>
         )}
 
